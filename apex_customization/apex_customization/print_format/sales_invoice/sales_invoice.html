@@ -1,0 +1,114 @@
+<style>
+	.print-format table, .print-format tr, 
+	.print-format td, .print-format div, .print-format p {
+		line-height: 150%;
+		vertical-align: middle;
+	}
+	@media screen {
+		.print-format {
+			width: 4in;
+			padding: 0.25in;
+			min-height: 8in;
+		}
+	}
+    td{
+        white-space:normal;
+        text-align: center;
+    }
+    th{
+        white-space:normal;
+        text-align: center;
+    }
+</style>
+<div  style="margin-top: -20px;text-align: center;">
+<img src="/assets/apex_customization/img/logo.jpeg" alt="" width="50%" height="120">
+</div>
+
+<p class="text-center" style="margin-bottom: 1rem;font-size: 18px;font-weight: 600;" >
+	Sales Invoice<br>
+</p>
+<p>
+	<b>{{ _("Invoice No") }}:</b> {{ doc.name }}<br>
+    <b>{{ _("Date") }}:</b> {{ doc.get_formatted("posting_date") }}<br>
+	<b>{{ _("Customer") }}:</b> {{ doc.customer_name }}<br>
+    {% if doc.sales_team %}
+	<b>{{ _("Sales Rep") }}:</b> {{  doc.sales_team[0].sales_person }}<br>
+    {%else%}
+	<b>{{ _("Sales Rep") }}:</b> <br>
+    {%endif%}
+</p>
+<table class="table table-condensed" style="table-layout: fixed;font-size: 11px;">
+	<thead>
+		<tr>
+			<th width="25%">{{ _("Item") }}</th>
+			<th width="10%">{{ _("QTY") }}</th>
+			<th width="15%">{{ _("Price List Rate") }}</th>
+			<th width="16%">{{ _("Discount %") }}</th>
+			<th width="16%">{{ _("Net Rate") }}</th>
+			<th width="18%">{{ _("Net Amount") }}</th>
+		</tr>
+	</thead>
+	<tbody>
+        {% set total_before = 0 %}
+		{%- for item in doc.items -%}
+        {% set total_before = total_before + item.price_list_rate %}
+        <tr>
+            <td colspan="6" class="text-left" style="border-bottom: 0px solid red !important;">{{ item.item_code }} : {{item.item_name}}</td>
+        </tr> 
+		<tr>
+			<td></td>
+            <td >{{item.qty}}</td>
+			<td >{{item.get_formatted("price_list_rate")}}</td>
+			<td >{{item.get_formatted("discount_percentage")}}</td>
+			<td >{{item.get_formatted("net_rate")}}</td>
+			<td class="text-center">{{item.get_formatted("net_amount")}}</td>
+		</tr>
+		{%- endfor -%}
+	</tbody>
+</table>
+<table class="table table-condensed no-border">
+	<tbody>
+	<tr>
+        <td class="text-right" style="width: 60%">
+            {{ _("Total Before Discount") }}
+        </td>
+        <td class="text-right">
+            {{ doc.get_formatted("custom_total_before_discount", doc)}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right" style="width: 60%">
+            {{ _("Discount") }}
+        </td>
+        <td class="text-right">
+            (-) ({{ doc.get_formatted("custom_discount", doc) }})
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right" style="width: 60%">
+            {{ _("Total") }}
+        </td>
+        <td class="text-right">
+            {{ doc.get_formatted("total", doc) }}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right" style="width: 60%">
+            {{ _("Grand Total") }}
+        </td>
+        <td class="text-right">
+            {{ doc.get_formatted("grand_total", doc) }}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right" style="width: 60%">
+            {{ _("Rounded Total") }}
+        </td>
+        <td class="text-right">
+            {{ doc.get_formatted("rounded_total", doc) }}
+        </td>
+    </tr>
+	</tbody>
+</table>
+<p class="text-center">{{ _("Thank you, please visit again.") }}</p>
+<p class="text-center">{{ _("WWW.APEXCADCAMS.com") }}</p>

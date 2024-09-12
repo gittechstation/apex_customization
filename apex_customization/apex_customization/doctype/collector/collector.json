@@ -1,0 +1,198 @@
+{
+ "actions": [],
+ "creation": "2024-06-24 15:16:39.821675",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ro4gj",
+  "can_not_collected",
+  "column_break_0uau5",
+  "collected",
+  "column_break_3vncj",
+  "not_collected",
+  "reason",
+  "section_break_t03er",
+  "payment_entry",
+  "payment_type",
+  "mode_of_payment",
+  "customer",
+  "customer_name",
+  "collection_date",
+  "column_break_gzpde",
+  "paid_amount",
+  "from_currency",
+  "received_amount",
+  "to_currency",
+  "exchange_rate_actual",
+  "payment_references_section",
+  "payment_references"
+ ],
+ "fields": [
+  {
+   "fieldname": "payment_entry",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Payment Entry",
+   "options": "Payment Entry",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "payment_entry.party",
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "is_virtual": 1,
+   "label": "Customer",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "payment_entry.party_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "is_virtual": 1,
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.can_not_collected=='Yes'",
+   "fieldname": "collected",
+   "fieldtype": "Button",
+   "label": "Collected"
+  },
+  {
+   "fieldname": "can_not_collected",
+   "fieldtype": "Select",
+   "label": "Collected",
+   "options": "\nYes\nNo",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.can_not_collected=='No'",
+   "fieldname": "not_collected",
+   "fieldtype": "Button",
+   "label": "Not Collected"
+  },
+  {
+   "depends_on": "eval:doc.can_not_collected=='No'",
+   "fieldname": "reason",
+   "fieldtype": "Data",
+   "label": "Reason",
+   "mandatory_depends_on": "eval:doc.can_not_collected==1"
+  },
+  {
+   "fieldname": "column_break_0uau5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_3vncj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "payment_entry.custom_expected_date",
+   "fieldname": "collection_date",
+   "fieldtype": "Datetime",
+   "label": "Collection Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "payment_entry.custom_exchange_rate_actual",
+   "fieldname": "exchange_rate_actual",
+   "fieldtype": "Data",
+   "label": "Exchange Rate Actual",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "payment_entry.payment_type",
+   "fieldname": "payment_type",
+   "fieldtype": "Data",
+   "label": "Payment Type",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "payment_entry.paid_amount",
+   "fieldname": "paid_amount",
+   "fieldtype": "Currency",
+   "label": "Paid Amount",
+   "options": "from_currency",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "payment_entry.received_amount",
+   "fieldname": "received_amount",
+   "fieldtype": "Currency",
+   "label": "Received Amount",
+   "options": "to_currency",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "payment_entry.paid_to_account_currency",
+   "fieldname": "to_currency",
+   "fieldtype": "Link",
+   "label": "To Currency",
+   "options": "Currency",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "payment_entry.paid_from_account_currency",
+   "fieldname": "from_currency",
+   "fieldtype": "Link",
+   "label": "From Currency",
+   "options": "Currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_ro4gj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_t03er",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_gzpde",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "payment_entry.mode_of_payment",
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Data",
+   "label": "Mode of Payment",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_references_section",
+   "fieldtype": "Section Break",
+   "label": "Payment References"
+  },
+  {
+   "fieldname": "payment_references",
+   "fieldtype": "Table",
+   "label": "Payment References",
+   "options": "Collector Table",
+   "read_only": 1
+  }
+ ],
+ "in_create": 1,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-07-03 16:18:38.010651",
+ "modified_by": "Administrator",
+ "module": "Apex Customization",
+ "name": "Collector",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

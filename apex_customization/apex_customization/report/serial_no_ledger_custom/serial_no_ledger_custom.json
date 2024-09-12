@@ -1,0 +1,51 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2024-07-26 01:58:52.356954",
+ "disabled": 1,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "APEX FOR TRADING",
+ "letterhead": null,
+ "modified": "2024-07-26 16:09:18.048160",
+ "modified_by": "Administrator",
+ "module": "Apex Customization",
+ "name": "Serial No Ledger Custom",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Stock Ledger Entry",
+ "report_name": "Serial No Ledger Custom",
+ "report_type": "Custom Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "A/REC Accountant"
+  },
+  {
+   "role": "Accounting Manager"
+  },
+  {
+   "role": "CEO"
+  },
+  {
+   "role": "General Accountant"
+  },
+  {
+   "role": "Stock Control Accountant"
+  },
+  {
+   "role": "A/P Accountant"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Stock User"
+  }
+ ]
+}
